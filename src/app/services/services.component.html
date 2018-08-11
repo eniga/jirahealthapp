@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+      <div class="card">
+        <div class="card-header card-header-tabs card-header-primary">
+            <h4 class="card-title">Service Types</h4>
+            <p class="card-category">The Service Types offered</p>
+        </div>  
+        <div class="card-body">
+            <table class="table table-hover">
+                <tbody *ngFor="let service of serviceTypes">
+                  <tr>
+                    <td>
+                      <button class="btn btn-primary btn-sm" (click)="loadKind(service)">Select</button>
+                    </td>
+                    <td>{{ service.name }}</td>
+                    <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm" data-toggle="modal" data-target="#ServiceTypeModal" (click)="editType(service)">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm" (click)="removeType(i)">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+  <div class="col-lg-6 col-md-12">
+    <div class="card">
+      <div class="card-header card-header-warning">
+        <h4 class="card-title">Service Kinds</h4>
+        <p class="card-category">The Service kinds for the selected service type</p>
+      </div>
+      <div class="card-body">
+          <table class="table table-hover">
+              <tbody *ngFor="let kind of serviceKinds; let i = index">
+                <tr>
+                  <td>{{ kind }}</td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm" data-toggle="modal" data-target="#ServiceKindModal">
+                      <i class="material-icons">edit</i>
+                    </button>
+                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                      <i class="material-icons">close</i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="ServiceTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Service Type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="ServiceTypeName">Name</label>
+          <input type="text" class="form-control" id="ServiceTypeName" [(ngModel)]="serviceTypeName">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="ServiceKindModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Service Kind</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
