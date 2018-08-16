@@ -1,146 +1,68 @@
-<div class="main-content">
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title ">Patients</h4>
-                      <p class="card-category"> This is a list of all registered patients in the system</p>
-                  </div>
-                  <div class="card-body">
-                      <div class="table-responsive">
-                          <table class="table">
-                              <thead class=" text-primary">
-                                  <th>
-                                      ID
-                                  </th>
-                                  <th>
-                                      Name
-                                  </th>
-                                  <th>
-                                      Service Type
-                                  </th>
-                                  <th>
-                                      Appointment Date
-                                  </th>
-                                  <th>
-                                      Status
-                                  </th>
-                              </thead>
-                              <tbody>
-                                  <tr>
-                                      <td>
-                                          1
-                                      </td>
-                                      <td>
-                                          Dakota Rice
-                                      </td>
-                                      <td>
-                                          Antenatal
-                                      </td>
-                                      <td>
-                                          25/12/2018
-                                      </td>
-                                      <td class="text-warning">
-                                          Unconfirmed
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          2
-                                      </td>
-                                      <td>
-                                          Minerva Hooper
-                                      </td>
-                                      <td>
-                                          Postnatal
-                                      </td>
-                                      <td>
-                                        22/09/2018
-                                      </td>
-                                      <td class="text-success">
-                                          Confirmed
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          3
-                                      </td>
-                                      <td>
-                                          Sage Rodriguez
-                                      </td>
-                                      <td>
-                                          Immunization
-                                      </td>
-                                      <td>
-                                          28/08/2018
-                                      </td>
-                                      <td class="text-danger">
-                                          Defaulter
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          4
-                                      </td>
-                                      <td>
-                                          Philip Chaney
-                                      </td>
-                                      <td>
-                                          Child Birth
-                                      </td>
-                                      <td>
-                                          12/05/2018
-                                      </td>
-                                      <td class="text-success">
-                                          Confirmed
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          5
-                                      </td>
-                                      <td>
-                                          Doris Greene
-                                      </td>
-                                      <td>
-                                          Pregnant
-                                      </td>
-                                      <td>
-                                          14/02/2018
-                                      </td>
-                                      <td class="text-success">
-                                          Confirmed
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          6
-                                      </td>
-                                      <td>
-                                          Mason Porter
-                                      </td>
-                                      <td>
-                                          Immunization
-                                      </td>
-                                      <td>
-                                          01/03/2018
-                                      </td>
-                                      <td class="text-danger">
-                                          Defaulter
-                                      </td>
-                                  </tr>
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
+<div class="row">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <div class="card-category">
+              <div class="card-title">Patients</div>
+              
+            </div>
           </div>
+          <div class="card-body">
+            <button mat-raised-button class="btn btn-info"> Add Patient </button>
+            <button mat-raised-button (click)="ExportTable()" class="btn btn-success"> Export to Excel</button>
+            <mat-form-field class="container pull-right">
+                <input matInput class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Filter" [(ngModel)]="filterValue">
+            </mat-form-field>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover" matSort>
+      
+                <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+        
+            
+                <!-- Patient ID Column -->
+                <ng-container matColumnDef="patientId">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.patientId}} </td>
+                </ng-container>
+                
+                <!-- First Name Column -->
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                </ng-container>
+                
+                <!-- Middle Name Column -->
+                <ng-container matColumnDef="middleName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Middle Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.middleName}} </td>
+                </ng-container>
+                
+                <!-- Last Name Column -->
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                </ng-container>
+                
+                <!-- Phonw Number Column -->
+                <ng-container matColumnDef="phoneNumber">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>
+                    <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let element;">
+                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm" data-toggle="modal" data-target="#ServiceTypeModal" (click)="GetPatient(element)">
+                            <i class="material-icons">edit</i>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>  
+          </div>
+        </div>
       </div>
-  </div>
-</div>
-<script>
-  $(document).ready(function(){
-    $(".table").DataTable();
-  });
-</script>
+      

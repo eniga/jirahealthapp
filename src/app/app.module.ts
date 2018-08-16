@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatTableModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +19,7 @@ import { ServicesComponent } from './services/services.component';
 import { CentresComponent } from './centres/centres.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { FooterComponent } from './footer/footer.component';
+import { CentresService } from './centres/centres.service';
 
 @NgModule({
   declarations: [
@@ -34,9 +39,16 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    MatInputModule,
+    MatSortModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [CentresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
